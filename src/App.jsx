@@ -7,7 +7,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import "./App.css";
-
+const key = import.meta.env.VITE_KEY;
 function App() {
   let [inp, setInp] = useState("");
   let [content, setContent] = useState({
@@ -15,15 +15,12 @@ function App() {
     temp: "",
     humidity: "",
   });
-
   let getCityWeather = async (city) => {
-    let URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=27d1909b10a7fa41a5c018b998bac5e4`;
+    let URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}`;
     let res = await fetch(URL);
     res = await res.json();
     return res.main;
   };
-
-  // getCityWeather("mumbai");
 
   let handleInput = (e) => {
     setInp(e.target.value);
@@ -39,7 +36,6 @@ function App() {
         humidity: data.humidity,
       };
     });
-    console.log(content);
   };
 
   return (
